@@ -171,38 +171,9 @@ selected[type]=value;
 let buttons=btn.parentElement.querySelectorAll(".choice");
 buttons.forEach(b=>b.classList.remove("active"));
 btn.classList.add("active");
-}
+}ج
 
-function generate(){
-if(!selected.gender||!selected.occasion||!selected.style||!selected.weather){
-alert(translations[currentLang].alert);
-return;
-}
-
-let looks=[
-{icon:"🧥👖👟",title:"Look 1",desc:getDesc(1)},
-{icon:"👔👞⌚",title:"Look 2",desc:getDesc(2)},
-{icon:"🖤💎👟",title:"Look 3",desc:getDesc(3)}
-];
-
-let html="";
-looks.forEach(l=>{
-html+=`
-<div class="look">
-<div class="outfit-img">${l.icon}</div>
-<h3>${l.title}</h3>
-<p>${l.desc}</p>
-</div>`;
-});
-
-document.getElementById("looks").innerHTML=html;
-document.getElementById("results").style.display="block";
-document.getElementById("results").scrollIntoView({behavior:"smooth"});
-}
-
-function getDesc(n){
-let s=selected.style;
-let w=selected.weather;
+fu;
 
 if(currentLang==="ar"){
 if(s==="elegant") return n+" — جاكيت أنيق، قميص كلاسيكي، سروال رسمي وحذاء جلد.";
