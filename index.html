@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DressMe AI - Your Personal AI Stylist</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#fff;color:#111}
+.hero{background:#000;color:#fff;text-align:center;padding:70px 20px}
+.hero h1{font-size:52px;margin-bottom:15px}
+.hero p{font-size:22px;line-height:1.6;color:#ddd}
+.btn{display:inline-block;background:#fff;color:#000;padding:16px 35px;border-radius:999px;text-decoration:none;font-size:20px;font-weight:bold;margin-top:25px}
+.section{padding:55px 20px;text-align:center}
+.section h2{font-size:36px;margin-bottom:20px}
+.section p{font-size:20px;line-height:1.7;color:#444}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1100px;margin:30px auto}
+.card{background:#f7f7f7;padding:28px;border-radius:22px;box-shadow:0 8px 25px rgba(0,0,0,.07)}
+.card h3{font-size:26px;margin-bottom:12px}
+select,button{width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ccc;font-size:18px}
+button{background:#000;color:#fff;font-weight:bold;border:none}
+.result{display:none;background:#000;color:#fff;padding:35px;border-radius:24px;margin-top:25px}
+.result h3{font-size:28px;margin-bottom:12px}
+.footer{background:#000;color:#fff;text-align:center;padding:25px;font-size:18px}
+.lang{font-size:14px;color:#aaa;margin-top:15px}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<h1>✨ DressMe AI</h1>
+<p>Your Personal AI Stylist</p>
+<p>Discover what to wear today based on your style, weather and occasion.</p>
+<a href="#styler" class="btn">Start Styling</a>
+<p class="lang">English • العربية • Français • Italiano</p>
+</section>
+
+<section class="section">
+<h2>How It Works</h2>
+
+<div class="cards">
+<div class="card">
+<h3>1️⃣ Choose Yourself</h3>
+<p>Select your gender and personal style.</p>
+</div>
+
+<div class="card">
+<h3>2️⃣ Pick Occasion</h3>
+<p>Work, date, wedding, travel or casual day.</p>
+</div>
+
+<div class="card">
+<h3>3️⃣ Get Outfit Ideas</h3>
+<p>Receive outfit suggestions instantly.</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="styler">
+<h2>Find Your Outfit</h2>
+<p>Answer 3 simple questions and get your look.</p>
+
+<div style="max-width:600px;margin:30px auto">
+
+<select id="gender">
+<option value="">Gender</option>
+<option value="man">Man</option>
+<option value="woman">Woman</option>
+</select>
+
+<select id="occasion">
+<option value="">Occasion</option>
+<option value="work">Work</option>
+<option value="date">Date</option>
+<option value="wedding">Wedding</option>
+<option value="travel">Travel</option>
+<option value="casual">Casual</option>
+</select>
+
+<select id="style">
+<option value="">Style</option>
+<option value="casual">Casual</option>
+<option value="smart">Smart Casual</option>
+<option value="elegant">Elegant</option>
+<option value="streetwear">Streetwear</option>
+</select>
+
+<button onclick="showOutfit()">Show My Outfit</button>
+
+<div class="result" id="result">
+<h3 id="lookTitle">Your Outfit</h3>
+<p id="lookText"></p>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<h2>Popular Styles</h2>
+
+<div class="cards">
+<div class="card">
+<h3>🖤 Elegant</h3>
+<p>Clean, premium and classy outfits for special moments.</p>
+</div>
+
+<div class="card">
+<h3>👟 Casual</h3>
+<p>Comfortable daily looks for school, work or friends.</p>
+</div>
+
+<div class="card">
+<h3>🧥 Smart Casual</h3>
+<p>The perfect balance between relaxed and professional.</p>
+</div>
+
+<div class="card">
+<h3>🔥 Streetwear</h3>
+<p>Modern, bold and confident urban outfits.</p>
+</div>
+</div>
+</section>
+
+<section class="section" style="background:#f7f7f7">
+<h2>Why DressMe AI?</h2>
+
+<p>✅ Fast outfit suggestions</p>
+<p>🌦️ Based on weather and occasion</p>
+<p>👗 Works for men and women</p>
+<p>✨ Simple, modern and easy to use</p>
+</section>
+
+<section class="section">
+<h2>Coming Soon</h2>
+<p>Upload your photo and get outfits that match your body shape, skin tone and personal style.</p>
+</section>
+
+<footer class="footer">
+© 2025 DressMe AI — All rights reserved
+</footer>
+
+<script>
+function showOutfit(){
+  var gender=document.getElementById("gender").value;
+  var occasion=document.getElementById("occasion").value;
+  var style=document.getElementById("style").value;
+  var result=document.getElementById("result");
+  var title=document.getElementById("lookTitle");
+  var text=document.getElementById("lookText");
+
+  if(!gender || !occasion || !style){
+    alert("Please select all options.");
+    return;
+  }
+
+  title.innerHTML="Your Recommended Look ✨";
+
+  if(occasion==="work"){
+    text.innerHTML="Smart blazer, clean shirt, dark trousers and elegant shoes. Perfect for a professional day.";
+  }else if(occasion==="date"){
+    text.innerHTML="Stylish jacket, fitted top, clean pants and simple accessories. Confident but not too formal.";
+  }else if(occasion==="wedding"){
+    text.innerHTML="Elegant formal outfit with premium shoes and refined colors. Perfect for a special event.";
+  }else if(occasion==="travel"){
+    text.innerHTML="Comfortable layers, relaxed pants and practical shoes. Stylish and easy for movement.";
+  }else{
+    text.innerHTML="Clean casual outfit: basic top, jeans or relaxed pants, sneakers and a simple accessory.";
+  }
+
+  result.style.display="block";
+}
+</script>
+
+</body>
+</html>
