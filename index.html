@@ -1,62 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DressMe AI</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#050505;color:white}
-:root{--gold:#d4af37;--green:#064e3b}
-
-.hero{
-min-height:100vh;
-background:radial-gradient(circle at top right,#064e3b,#000 60%);
-display:flex;align-items:center;justify-content:center;text-align:center;
-padding:50px 20px
-}
-.hero h1{font-size:58px;color:var(--gold);margin-bottom:20px}
-.hero p{font-size:23px;color:#ddd;line-height:1.7}
-.btn{
-display:inline-block;background:linear-gradient(135deg,#d4af37,#ffe680);
-color:#000;padding:18px 40px;border-radius:999px;text-decoration:none;
-font-size:22px;font-weight:bold;margin-top:28px
-}
-.langs button{
-background:#111;color:white;border:1px solid var(--gold);
-padding:12px 18px;border-radius:25px;margin:6px;font-size:16px
-}
-.section{padding:60px 20px;text-align:center}
-.section h2{font-size:38px;color:var(--gold);margin-bottom:25px}
-.cards{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;max-width:1100px;margin:30px auto
-}
-.card{
-background:#0b0b0b;border:1px solid #2d6a4f;border-radius:22px;
-padding:28px;box-shadow:0 0 20px rgba(212,175,55,.08)
-}
-.card h3{font-size:26px;color:var(--gold);margin-bottom:12px}
-.card p{font-size:19px;color:#ddd;line-height:1.6}
-.styler{
-max-width:700px;margin:30px auto;background:#0b0b0b;
-border:1px solid var(--gold);border-radius:24px;padding:25px
-}
-select,input,button{
-width:100%;padding:16px;margin:10px 0;border-radius:12px;
-border:1px solid #333;font-size:18px;background:#111;color:white
-}
-button.action{
-background:linear-gradient(135deg,#064e3b,#16a34a);
-border:1px solid var(--gold);font-weight:bold
-}
-.result{
-display:none;background:#111;border:1px solid var(--gold);
-padding:25px;border-radius:18px;margin-top:20px
-}
-.result h3{color:var(--gold);font-size:28px;margin-bottom:10px}
-.result p{font-size:20px;color:#eee;line-height:1.7}
+:root{--gold:#d4af37;--green:#064e3b;--dark:#050505}
+.hero{min-height:90vh;background:radial-gradient(circle at top,#064e3b,#000 60%);display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+h1{font-size:54px;color:var(--gold);margin-bottom:15px}
+h2{font-size:34px;color:var(--gold);margin-bottom:20px;text-align:center}
+p{font-size:20px;color:#ddd;line-height:1.7}
+.btn{display:inline-block;background:linear-gradient(135deg,#d4af37,#ffe680);color:#000;padding:16px 35px;border-radius:999px;text-decoration:none;font-size:22px;font-weight:bold;margin-top:25px}
+.langs button,.choice{background:#111;color:white;border:1px solid var(--gold);padding:14px;border-radius:18px;margin:7px;font-size:17px}
+.section{padding:55px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1000px;margin:25px auto}
+.card,.look{background:#0b0b0b;border:1px solid #2d6a4f;border-radius:22px;padding:25px;text-align:center;box-shadow:0 0 20px rgba(212,175,55,.08)}
+.card h3,.look h3{color:var(--gold);font-size:25px;margin-bottom:10px}
+.panel{max-width:850px;margin:auto;background:#0b0b0b;border:1px solid var(--gold);border-radius:25px;padding:25px}
+.choices{text-align:center;margin-bottom:25px}
+.choice.active{background:linear-gradient(135deg,#064e3b,#16a34a);border-color:#ffe680}
+.generate{width:100%;background:linear-gradient(135deg,#d4af37,#ffe680);color:#000;border:none;padding:17px;border-radius:18px;font-size:22px;font-weight:bold}
+.results{display:none;margin-top:30px}
+.outfit-img{font-size:70px;margin:15px}
 .footer{background:#000;border-top:1px solid #333;text-align:center;padding:25px;color:#aaa}
 </style>
 </head>
@@ -67,8 +35,7 @@ padding:25px;border-radius:18px;margin-top:20px
 <div>
 <h1 id="title">✨ DressMe AI</h1>
 <p id="subtitle">Your Personal AI Stylist</p>
-<p id="heroText">Discover what to wear today based on your style, weather and occasion.</p>
-
+<p id="heroText">Choose your style, occasion and weather. Get outfit ideas instantly.</p>
 <a href="#styler" class="btn" id="startBtn">Start Styling</a>
 
 <div class="langs">
@@ -82,178 +49,109 @@ padding:25px;border-radius:18px;margin-top:20px
 
 <section class="section">
 <h2 id="howTitle">How It Works</h2>
-
-<div class="cards">
-<div class="card">
-<h3 id="step1">1️⃣ Choose Yourself</h3>
-<p id="step1Text">Select your gender, style and weather.</p>
-</div>
-
-<div class="card">
-<h3 id="step2">2️⃣ Pick Occasion</h3>
-<p id="step2Text">Work, date, wedding, travel or casual day.</p>
-</div>
-
-<div class="card">
-<h3 id="step3">3️⃣ Get Outfit Ideas</h3>
-<p id="step3Text">Receive outfit suggestions instantly.</p>
-</div>
+<div class="grid">
+<div class="card"><h3 id="h1">1️⃣ Choose</h3><p id="h1t">Select gender, occasion, style and weather.</p></div>
+<div class="card"><h3 id="h2">2️⃣ Generate</h3><p id="h2t">DressMe AI creates 3 outfit ideas.</p></div>
+<div class="card"><h3 id="h3">3️⃣ Wear</h3><p id="h3t">Pick the look that fits your day.</p></div>
 </div>
 </section>
 
 <section class="section" id="styler">
 <h2 id="findTitle">Find Your Outfit</h2>
-<p id="findText">Answer a few questions and get your perfect look.</p>
 
-<div class="styler">
+<div class="panel">
 
-<select id="gender">
-<option value="">Gender</option>
-<option value="male">Male</option>
-<option value="female">Female</option>
-</select>
-
-<select id="occasion">
-<option value="">Occasion</option>
-<option value="work">Work</option>
-<option value="date">Date</option>
-<option value="wedding">Wedding</option>
-<option value="travel">Travel</option>
-<option value="casual">Casual</option>
-</select>
-
-<select id="style">
-<option value="">Style</option>
-<option value="elegant">Elegant</option>
-<option value="streetwear">Streetwear</option>
-<option value="sport">Sport</option>
-<option value="luxury">Luxury</option>
-<option value="minimalist">Minimalist</option>
-</select>
-
-<select id="weather">
-<option value="">Weather</option>
-<option value="hot">Hot ☀️</option>
-<option value="mild">Mild 🌤️</option>
-<option value="cold">Cold ❄️</option>
-<option value="rain">Rainy 🌧️</option>
-</select>
-
-<input id="city" placeholder="City">
-
-<button class="action" onclick="generateOutfit()" id="showBtn">✨ Generate Outfit</button>
-
-<div class="result" id="result">
-<h3 id="lookTitle">Your Recommended Look</h3>
-<p id="lookText"></p>
+<div class="choices">
+<h3 id="genderTitle">Gender</h3>
+<button class="choice" onclick="pick('gender','male',this)">👨 Male</button>
+<button class="choice" onclick="pick('gender','female',this)">👩 Female</button>
 </div>
 
+<div class="choices">
+<h3 id="occasionTitle">Occasion</h3>
+<button class="choice" onclick="pick('occasion','work',this)">💼 Work</button>
+<button class="choice" onclick="pick('occasion','date',this)">🌹 Date</button>
+<button class="choice" onclick="pick('occasion','wedding',this)">💍 Wedding</button>
+<button class="choice" onclick="pick('occasion','travel',this)">✈️ Travel</button>
+<button class="choice" onclick="pick('occasion','casual',this)">☕ Casual</button>
 </div>
-</section>
 
-<section class="section">
-<h2 id="stylesTitle">Popular Styles</h2>
+<div class="choices">
+<h3 id="styleTitle">Style</h3>
+<button class="choice" onclick="pick('style','elegant',this)">🖤 Elegant</button>
+<button class="choice" onclick="pick('style','streetwear',this)">🔥 Streetwear</button>
+<button class="choice" onclick="pick('style','sport',this)">🏃 Sport</button>
+<button class="choice" onclick="pick('style','luxury',this)">💎 Luxury</button>
+<button class="choice" onclick="pick('style','minimalist',this)">🤍 Minimalist</button>
+</div>
 
-<div class="cards">
-<div class="card"><h3>🖤 Elegant</h3><p id="elegantText">Premium and classy outfits for special moments.</p></div>
-<div class="card"><h3>👟 Casual</h3><p id="casualText">Comfortable daily looks for work, school or friends.</p></div>
-<div class="card"><h3>💎 Luxury</h3><p id="luxuryText">High-end outfit ideas with a premium feeling.</p></div>
-<div class="card"><h3>🔥 Streetwear</h3><p id="streetText">Modern, bold and confident urban outfits.</p></div>
+<div class="choices">
+<h3 id="weatherTitle">Weather</h3>
+<button class="choice" onclick="pick('weather','hot',this)">☀️ Hot</button>
+<button class="choice" onclick="pick('weather','mild',this)">🌤️ Mild</button>
+<button class="choice" onclick="pick('weather','cold',this)">❄️ Cold</button>
+<button class="choice" onclick="pick('weather','rain',this)">🌧️ Rainy</button>
+</div>
+
+<button class="generate" onclick="generate()" id="generateBtn">✨ Generate 3 Looks</button>
+
+<div class="results" id="results">
+<h2 id="resultTitle">Your Looks</h2>
+<div class="grid" id="looks"></div>
+</div>
+
 </div>
 </section>
 
 <section class="section">
 <h2 id="whyTitle">Why DressMe AI?</h2>
-<p id="why1">✅ Fast outfit suggestions</p>
-<p id="why2">🌦️ Based on weather and occasion</p>
-<p id="why3">👗 Works for men and women</p>
-<p id="why4">✨ Simple, modern and easy to use</p>
+<div class="grid">
+<div class="card"><h3>⚡</h3><p id="why1">Fast outfit suggestions</p></div>
+<div class="card"><h3>🌦️</h3><p id="why2">Based on weather and occasion</p></div>
+<div class="card"><h3>👗</h3><p id="why3">Works for men and women</p></div>
+<div class="card"><h3>✨</h3><p id="why4">Modern, simple and stylish</p></div>
+</div>
 </section>
 
 <section class="section">
 <h2 id="soonTitle">Coming Soon</h2>
-<p id="soonText">Upload your photo and get outfits that match your body shape, skin tone and personal style.</p>
+<p id="soonText" style="text-align:center">Upload your photo and get outfits that match your body shape, skin tone and personal style.</p>
 </section>
 
-<footer class="footer">
-© 2025 DressMe AI — All rights reserved
-</footer>
+<footer class="footer">© 2025 DressMe AI — All rights reserved</footer>
 
 <script>
+let selected={gender:"",occasion:"",style:"",weather:""};
 let currentLang="en";
 
-const t={
+const translations={
 en:{
-title:"✨ DressMe AI",subtitle:"Your Personal AI Stylist",
-heroText:"Discover what to wear today based on your style, weather and occasion.",
-startBtn:"Start Styling",howTitle:"How It Works",
-step1:"1️⃣ Choose Yourself",step1Text:"Select your gender, style and weather.",
-step2:"2️⃣ Pick Occasion",step2Text:"Work, date, wedding, travel or casual day.",
-step3:"3️⃣ Get Outfit Ideas",step3Text:"Receive outfit suggestions instantly.",
-findTitle:"Find Your Outfit",findText:"Answer a few questions and get your perfect look.",
-showBtn:"✨ Generate Outfit",stylesTitle:"Popular Styles",
-elegantText:"Premium and classy outfits for special moments.",
-casualText:"Comfortable daily looks for work, school or friends.",
-luxuryText:"High-end outfit ideas with a premium feeling.",
-streetText:"Modern, bold and confident urban outfits.",
-whyTitle:"Why DressMe AI?",why1:"✅ Fast outfit suggestions",why2:"🌦️ Based on weather and occasion",
-why3:"👗 Works for men and women",why4:"✨ Simple, modern and easy to use",
-soonTitle:"Coming Soon",soonText:"Upload your photo and get outfits that match your body shape, skin tone and personal style.",
-alert:"Please complete all fields"
+subtitle:"Your Personal AI Stylist",heroText:"Choose your style, occasion and weather. Get outfit ideas instantly.",startBtn:"Start Styling",
+howTitle:"How It Works",h1:"1️⃣ Choose",h1t:"Select gender, occasion, style and weather.",h2:"2️⃣ Generate",h2t:"DressMe AI creates 3 outfit ideas.",h3:"3️⃣ Wear",h3t:"Pick the look that fits your day.",
+findTitle:"Find Your Outfit",genderTitle:"Gender",occasionTitle:"Occasion",styleTitle:"Style",weatherTitle:"Weather",generateBtn:"✨ Generate 3 Looks",resultTitle:"Your Looks",
+whyTitle:"Why DressMe AI?",why1:"Fast outfit suggestions",why2:"Based on weather and occasion",why3:"Works for men and women",why4:"Modern, simple and stylish",
+soonTitle:"Coming Soon",soonText:"Upload your photo and get outfits that match your body shape, skin tone and personal style.",alert:"Choose all options first."
 },
 ar:{
-title:"✨ دريس مي AI",subtitle:"ستايلست ذكي خاص بك",
-heroText:"اكتشف شنو تلبس اليوم حسب الستايل ديالك، الجو والمناسبة.",
-startBtn:"ابدأ التنسيق",howTitle:"كيفاش كيخدم؟",
-step1:"1️⃣ اختار نفسك",step1Text:"اختار الجنس، الستايل والجو.",
-step2:"2️⃣ اختار المناسبة",step2Text:"عمل، موعد، عرس، سفر أو يوم عادي.",
-step3:"3️⃣ خذ اقتراحات",step3Text:"توصل بأفكار ملابس بسرعة.",
-findTitle:"لقى اللوك ديالك",findText:"جاوب على أسئلة بسيطة وخذ اللوك المناسب.",
-showBtn:"✨ ولد اللوك",stylesTitle:"ستايلات مشهورة",
-elegantText:"لوك راقي وأنيق للمناسبات الخاصة.",
-casualText:"لباس مريح لليوم، العمل أو الخروج.",
-luxuryText:"أفكار لباس فاخرة بإحساس Premium.",
-streetText:"ستايل عصري وجريء للشارع.",
-whyTitle:"علاش DressMe AI؟",why1:"✅ اقتراحات سريعة",why2:"🌦️ حسب الجو والمناسبة",
-why3:"👗 مناسب للرجال والنساء",why4:"✨ بسيط وعصري وسهل",
-soonTitle:"قريباً",soonText:"رفع صورتك باش تحصل على لوكات تناسب شكل جسمك ولون بشرتك.",
-alert:"كمل جميع الخانات"
+subtitle:"ستايلست ذكي خاص بك",heroText:"اختار الستايل، المناسبة والجو وخذ اقتراحات ملابس فوراً.",startBtn:"ابدأ التنسيق",
+howTitle:"كيفاش كيخدم؟",h1:"1️⃣ اختار",h1t:"اختار الجنس، المناسبة، الستايل والجو.",h2:"2️⃣ ولد اللوك",h2t:"DressMe AI يعطيك 3 اقتراحات.",h3:"3️⃣ لبس",h3t:"اختار اللوك اللي مناسب ليومك.",
+findTitle:"لقى اللوك ديالك",genderTitle:"الجنس",occasionTitle:"المناسبة",styleTitle:"الستايل",weatherTitle:"الجو",generateBtn:"✨ ولد 3 لوكات",resultTitle:"اللوكات المقترحة",
+whyTitle:"علاش DressMe AI؟",why1:"اقتراحات سريعة",why2:"حسب الجو والمناسبة",why3:"للرجال والنساء",why4:"عصري، بسيط وأنيق",
+soonTitle:"قريباً",soonText:"رفع صورتك باش تحصل على لوكات تناسب شكل جسمك ولون بشرتك.",alert:"اختار جميع الخيارات أولاً."
 },
 fr:{
-title:"✨ DressMe AI",subtitle:"Votre styliste IA personnel",
-heroText:"Découvrez quoi porter selon votre style, la météo et l’occasion.",
-startBtn:"Commencer",howTitle:"Comment ça marche",
-step1:"1️⃣ Choisissez votre profil",step1Text:"Sélectionnez votre genre, style et météo.",
-step2:"2️⃣ Choisissez l’occasion",step2Text:"Travail, rendez-vous, mariage, voyage ou casual.",
-step3:"3️⃣ Obtenez des idées",step3Text:"Recevez des suggestions instantanément.",
-findTitle:"Trouvez votre tenue",findText:"Répondez à quelques questions et obtenez votre look.",
-showBtn:"✨ Générer la tenue",stylesTitle:"Styles populaires",
-elegantText:"Des tenues premium et élégantes.",
-casualText:"Des looks confortables pour tous les jours.",
-luxuryText:"Des idées haut de gamme avec un style premium.",
-streetText:"Des looks urbains modernes et audacieux.",
-whyTitle:"Pourquoi DressMe AI ?",why1:"✅ Suggestions rapides",why2:"🌦️ Selon la météo et l’occasion",
-why3:"👗 Pour hommes et femmes",why4:"✨ Simple, moderne et facile",
-soonTitle:"Bientôt",soonText:"Téléchargez votre photo pour obtenir des tenues adaptées à votre morphologie.",
-alert:"Veuillez compléter tous les champs"
+subtitle:"Votre styliste IA personnel",heroText:"Choisissez style, occasion et météo. Obtenez des idées instantanément.",startBtn:"Commencer",
+howTitle:"Comment ça marche",h1:"1️⃣ Choisir",h1t:"Sélectionnez genre, occasion, style et météo.",h2:"2️⃣ Générer",h2t:"DressMe AI crée 3 idées de tenues.",h3:"3️⃣ Porter",h3t:"Choisissez le look adapté à votre journée.",
+findTitle:"Trouvez votre tenue",genderTitle:"Genre",occasionTitle:"Occasion",styleTitle:"Style",weatherTitle:"Météo",generateBtn:"✨ Générer 3 looks",resultTitle:"Vos looks",
+whyTitle:"Pourquoi DressMe AI ?",why1:"Suggestions rapides",why2:"Selon météo et occasion",why3:"Pour hommes et femmes",why4:"Moderne, simple et stylé",
+soonTitle:"Bientôt",soonText:"Téléchargez votre photo pour obtenir des tenues adaptées à votre morphologie.",alert:"Choisissez toutes les options."
 },
 it:{
-title:"✨ DressMe AI",subtitle:"Il tuo stylist AI personale",
-heroText:"Scopri cosa indossare oggi in base al tuo stile, meteo e occasione.",
-startBtn:"Inizia",howTitle:"Come funziona",
-step1:"1️⃣ Scegli il tuo profilo",step1Text:"Seleziona genere, stile e meteo.",
-step2:"2️⃣ Scegli l’occasione",step2Text:"Lavoro, appuntamento, matrimonio, viaggio o casual.",
-step3:"3️⃣ Ricevi idee outfit",step3Text:"Ottieni suggerimenti in pochi secondi.",
-findTitle:"Trova il tuo outfit",findText:"Rispondi a poche domande e ottieni il look perfetto.",
-showBtn:"✨ Genera outfit",stylesTitle:"Stili popolari",
-elegantText:"Outfit eleganti e premium.",
-casualText:"Look comodi per tutti i giorni.",
-luxuryText:"Idee di outfit di fascia alta.",
-streetText:"Look urbani moderni e sicuri.",
-whyTitle:"Perché DressMe AI?",why1:"✅ Suggerimenti rapidi",why2:"🌦️ Basato su meteo e occasione",
-why3:"👗 Per uomini e donne",why4:"✨ Semplice, moderno e facile",
-soonTitle:"Prossimamente",soonText:"Carica la tua foto e ricevi outfit adatti al tuo corpo e stile.",
-alert:"Completa tutti i campi"
+subtitle:"Il tuo stylist AI personale",heroText:"Scegli stile, occasione e meteo. Ricevi idee outfit subito.",startBtn:"Inizia",
+howTitle:"Come funziona",h1:"1️⃣ Scegli",h1t:"Seleziona genere, occasione, stile e meteo.",h2:"2️⃣ Genera",h2t:"DressMe AI crea 3 idee outfit.",h3:"3️⃣ Indossa",h3t:"Scegli il look adatto alla tua giornata.",
+findTitle:"Trova il tuo outfit",genderTitle:"Genere",occasionTitle:"Occasione",styleTitle:"Stile",weatherTitle:"Meteo",generateBtn:"✨ Genera 3 look",resultTitle:"I tuoi look",
+whyTitle:"Perché DressMe AI?",why1:"Suggerimenti rapidi",why2:"Basato su meteo e occasione",why3:"Per uomini e donne",why4:"Moderno, semplice e stiloso",
+soonTitle:"Prossimamente",soonText:"Carica la tua foto e ricevi outfit adatti al tuo corpo e stile.",alert:"Scegli tutte le opzioni."
 }
 };
 
@@ -261,42 +159,80 @@ function setLang(lang){
 currentLang=lang;
 document.documentElement.lang=lang;
 document.documentElement.dir=lang==="ar"?"rtl":"ltr";
-for(let k in t[lang]){
-let el=document.getElementById(k);
-if(el) el.innerHTML=t[lang][k];
+let tr=translations[lang];
+for(let key in tr){
+let el=document.getElementById(key);
+if(el) el.innerHTML=tr[key];
 }
 }
 
-function generateOutfit(){
-let gender=document.getElementById("gender").value;
-let occasion=document.getElementById("occasion").value;
-let style=document.getElementById("style").value;
-let weather=document.getElementById("weather").value;
+function pick(type,value,btn){
+selected[type]=value;
+let buttons=btn.parentElement.querySelectorAll(".choice");
+buttons.forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+}
 
-if(!gender || !occasion || !style || !weather){
-alert(t[currentLang].alert);
+function generate(){
+if(!selected.gender||!selected.occasion||!selected.style||!selected.weather){
+alert(translations[currentLang].alert);
 return;
 }
 
-let outfit="";
+let looks=[
+{icon:"🧥👖👟",title:"Look 1",desc:getDesc(1)},
+{icon:"👔👞⌚",title:"Look 2",desc:getDesc(2)},
+{icon:"🖤💎👟",title:"Look 3",desc:getDesc(3)}
+];
 
-if(currentLang==="ar"){
-if(style==="elegant") outfit="👔 جاكيت أنيق + قميص كلاسيكي + سروال رسمي + حذاء جلد.";
-else if(style==="streetwear") outfit="🧥 Hoodie واسع + Cargo Pants + Sneakers عصرية.";
-else if(style==="sport") outfit="🏃 تيشورت رياضي + Joggers + حذاء رياضي مريح.";
-else if(style==="luxury") outfit="💎 جاكيت فاخر + سروال أنيق + ساعة راقية + حذاء Premium.";
-else outfit="🤍 تيشورت محايد + جينز نظيف + Sneakers بيضاء.";
-}else{
-if(style==="elegant") outfit="👔 Elegant blazer + classic shirt + formal pants + leather shoes.";
-else if(style==="streetwear") outfit="🧥 Oversized hoodie + cargo pants + trendy sneakers.";
-else if(style==="sport") outfit="🏃 Sport t-shirt + joggers + comfortable running shoes.";
-else if(style==="luxury") outfit="💎 Premium jacket + elegant pants + luxury watch + premium shoes.";
-else outfit="🤍 Neutral t-shirt + clean jeans + white sneakers.";
+let html="";
+looks.forEach(l=>{
+html+=`
+<div class="look">
+<div class="outfit-img">${l.icon}</div>
+<h3>${l.title}</h3>
+<p>${l.desc}</p>
+</div>`;
+});
+
+document.getElementById("looks").innerHTML=html;
+document.getElementById("results").style.display="block";
+document.getElementById("results").scrollIntoView({behavior:"smooth"});
 }
 
-document.getElementById("lookTitle").innerHTML=currentLang==="ar"?"اللوك المقترح ✨":"Your Recommended Look ✨";
-document.getElementById("lookText").innerHTML=outfit;
-document.getElementById("result").style.display="block";
+function getDesc(n){
+let s=selected.style;
+let w=selected.weather;
+
+if(currentLang==="ar"){
+if(s==="elegant") return n+" — جاكيت أنيق، قميص كلاسيكي، سروال رسمي وحذاء جلد.";
+if(s==="streetwear") return n+" — Hoodie واسع، Cargo pants، Sneakers وستايل عصري.";
+if(s==="sport") return n+" — تيشورت رياضي، Joggers، حذاء مريح ولوك عملي.";
+if(s==="luxury") return n+" — جاكيت فاخر، ألوان داكنة، ساعة راقية وتفاصيل ذهبية.";
+return n+" — تيشورت بسيط، جينز نظيف، Sneakers بيضاء وألوان هادئة.";
+}
+
+if(currentLang==="fr"){
+if(s==="elegant") return n+" — Blazer élégant, chemise classique, pantalon chic et chaussures en cuir.";
+if(s==="streetwear") return n+" — Hoodie oversize, cargo pants, sneakers et style urbain.";
+if(s==="sport") return n+" — T-shirt sport, joggers, chaussures confortables.";
+if(s==="luxury") return n+" — Veste premium, couleurs sombres, montre élégante et détails dorés.";
+return n+" — T-shirt neutre, jean propre, sneakers blanches.";
+}
+
+if(currentLang==="it"){
+if(s==="elegant") return n+" — Blazer elegante, camicia classica, pantaloni formali e scarpe in pelle.";
+if(s==="streetwear") return n+" — Hoodie oversize, cargo pants, sneakers e stile urbano.";
+if(s==="sport") return n+" — T-shirt sportiva, joggers e scarpe comode.";
+if(s==="luxury") return n+" — Giacca premium, colori scuri, orologio elegante e dettagli dorati.";
+return n+" — T-shirt neutra, jeans puliti e sneakers bianche.";
+}
+
+if(s==="elegant") return n+" — Elegant blazer, classic shirt, formal pants and leather shoes.";
+if(s==="streetwear") return n+" — Oversized hoodie, cargo pants, sneakers and urban confidence.";
+if(s==="sport") return n+" — Sport t-shirt, joggers and comfortable running shoes.";
+if(s==="luxury") return n+" — Premium jacket, dark tones, luxury watch and gold details.";
+return n+" — Neutral t-shirt, clean jeans, white sneakers and calm colors.";
 }
 </script>
 
